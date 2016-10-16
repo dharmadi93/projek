@@ -3,9 +3,64 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+  <div class="login-page">
+    <div class="container-fluid container-table">
+      <div class="row vertical-center-row">
+        <div class="col-sm-12">
+          <div class="form">
+            <form class="register-form">
+              <div class="form-group-lg">
+                <input type="text" class="form-control" placeholder="username"/>
+              </div>
+              <div class="form-group-lg">
+                <input type="password" class="form-control" placeholder="password"/>
+              </div>
+              <div class="form-group-lg">
+                <input type="text" class="form-control" placeholder="firstname"/>
+              </div>
+              <div class="form-group-lg">
+                <input type="text" class="form-control" placeholder="lastname"/>
+              </div>
+              <div class="form-group-lg">
+                <input type="email" class="form-control" placeholder="email"/>
+              </div>
+              <div class="form-group-lg">
+                <textarea name="address" class="form-control" cols="30" rows="5" placeholder="address"></textarea>
+              </div>
+              <div class="form-group-lg">
+                <input type="number" class="form-control" placeholder="phone"/>
+              </div>
+              <button class="btn btn-success text-uppercase">create</button>
+              <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+            <form class="login-form">
+              <div class="form-group-lg">
+                <input type="text" class="form-control" placeholder="username"/>
+              </div>
+              <div class="form-group-lg">
+                <input type="password" class="form-control" placeholder="password"/>
+              </div>
+              <button class="btn btn-success">login</button>
+              <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <script src="/javascripts/jquery-3.1.1.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+
+    <script>
+      $('.message a').click(function(){
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+      });
+    </script>
   </body>
 </html>
