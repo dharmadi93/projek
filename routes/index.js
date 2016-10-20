@@ -5,7 +5,14 @@ var Users = models.User
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+  if(typeof req.session.user_id != "undefined") {
+    res.redirect('/dashboard')
+  }
+  else {
+    res.render('index', {title: 'Login'})
+  }
+
 });
 
 router.post('/login', function (req, res, next) {
@@ -20,6 +27,10 @@ router.post('/login', function (req, res, next) {
   }).then(function (user) {
     try {
       if(user.username) {
+        console.log(req.session);
+        req.session.user_id = user.id
+        req.session.username = user.username
+        req.session.role = user.role
         res.redirect('/dashboard')
       }
     }catch (err) {
