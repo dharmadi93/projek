@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include head.ejs %>
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+
+<!-- BEGIN HEADER -->
+<% include top_header.ejs %>
+<!-- END HEADER -->
+
+
+<div class="clearfix"> </div>
+
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <% include sidebar.ejs %>
+    <!-- END SIDEBAR -->
+
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <% include home_link.ejs %>
+                    <li>
+                        <span>Add Finance</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- END PAGE BAR -->
+            <!-- BEGIN PAGE TITLE-->
+            <h3 class="page-title"> Add Finance</h3>
+            <!-- END PAGE TITLE-->
+            <!-- END PAGE HEADER-->
+
+
+
+
+            <!-- BEGIN DASHBOARD STATS 1-->
+            <div class="row">
+              <div class="col-sm-12">
+                <form class="form-horizontal" method="post" action="/dashboard/edit_finance">
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-2">Vehicle Id: <%= finance.VehicleId%></label>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-2">Price:</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="price" value="<%= finance.price%>">
+                    </div>
+                  </div>
+
+                  <input type="hidden" name="finance_id" value="<%= finance.id%>">
+
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- END DASHBOARD STATS 1-->
+
+
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<% include footer.ejs %>
+<!-- END FOOTER -->
+
+
+<% include script.ejs %>
+
+</body>
+</html>

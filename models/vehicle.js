@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
         Vehicle.belongsTo(models.User)
+        Vehicle.hasMany(models.Finance)
       }
     }
   });

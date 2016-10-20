@@ -29,21 +29,7 @@
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
             <li class="nav-item start active open">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
-                    <span class="title">Dashboard</span>
-                    <span class="selected"></span>
-                    <span class="arrow open"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item start active open">
-                        <a href="index.html" class="nav-link ">
-                            <i class="icon-bar-chart"></i>
-                            <span class="title">Dashboard 1</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                </ul>
+                <a href="/dashboard" class="nav-link nav-toggle">Dashboard</a>
             </li>
 
             <li class="nav-item  ">
@@ -58,11 +44,13 @@
                             <span class="title">Vehicle List</span>
                         </a>
                     </li>
+                    <% if (data.role == "administrator") { %>
                     <li class="nav-item  ">
                         <a href="/dashboard/add_vehicle" class="nav-link ">
                             <span class="title">Add Vehicle</span>
                         </a>
                     </li>
+                    <% } %>
                 </ul>
             </li>
 
@@ -78,31 +66,28 @@
                             <span class="title">User List</span>
                         </a>
                     </li>
-                    <li class="nav-item  ">
-                        <a href="/dashboard/edit_user" class="nav-link ">
-                            <span class="title">Edit User</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
 
             <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-puzzle"></i>
-                    <span class="title">Report</span>
+                    <span class="title">Finance</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="/dashboard/vehicle_report" class="nav-link ">
-                            <span class="title">Vehicle</span>
+                        <a href="/dashboard/finance" class="nav-link ">
+                            <span class="title">Finance List</span>
                         </a>
                     </li>
+                    <% if (data.role == "administrator") { %>
                     <li class="nav-item  ">
-                        <a href="/dashboard/profit_report" class="nav-link ">
-                            <span class="title">Profit</span>
+                        <a href="/dashboard/add_finance" class="nav-link ">
+                            <span class="title">Add Finance</span>
                         </a>
                     </li>
+                    <% } %>
                 </ul>
             </li>
         </ul>

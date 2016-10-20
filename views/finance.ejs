@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include head.ejs %>
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+
+<!-- BEGIN HEADER -->
+<% include top_header.ejs %>
+<!-- END HEADER -->
+
+
+<div class="clearfix"> </div>
+
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <% include sidebar.ejs %>
+    <!-- END SIDEBAR -->
+
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    <% include home_link.ejs %>
+                    <li>
+                        <span>Finance</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- END PAGE BAR -->
+            <!-- BEGIN PAGE TITLE-->
+            <h3 class="page-title"> Finance</h3>
+            <!-- END PAGE TITLE-->
+            <!-- END PAGE HEADER-->
+
+
+
+
+            <!-- BEGIN DASHBOARD STATS 1-->
+            <div class="row">
+
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <td>No.</td>
+                      <td>Vehicle Id</td>
+                      <td>Price</td>
+                      <td>Created At</td>
+                      <td>Updated At</td>
+                      <td>Action</td>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% for (var i = 0; i < finance.length; i++) { %>
+                    <tr>
+                      <td><%= i+1%></td>
+                      <td><%= finance[i].VehicleId%></td>
+                      <td><%= finance[i].price%></td>
+                      <td><%= finance[i].createdAt%></td>
+                      <td><%= finance[i].updatedAt%></td>
+                      <td>
+                        <a href="/dashboard/edit_finance/<%= finance[i].id%>" class="btn btn-warning">Edit</a>
+                        <a href="/dashboard/delete_finance/<%= finance[i].id%>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                      </td>
+                    </tr>
+
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- END DASHBOARD STATS 1-->
+
+
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<% include footer.ejs %>
+<!-- END FOOTER -->
+
+
+<% include script.ejs %>
+
+</body>
+</html>
