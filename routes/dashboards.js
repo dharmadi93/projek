@@ -3,6 +3,7 @@ var router = express.Router();
 var models = require('../models')
 var Users = models.User
 var Vehicles = models.Vehicle
+var Finances = models.Finance
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -146,9 +147,13 @@ router.get('/add_vehicle', function (req, res, next) {
     role: req.session.role
   }
 
-  Users.findAll().then(function (user) {
-    res.render('add_vehicle', {title: "Add Vehicle", data: data, user: user})
-  })
+  if (data.role != "administrator") {
+    res.redirect('/dashboard')
+  } else {
+    Users.findAll().then(function (user) {
+      res.render('add_vehicle', {title: "Add Vehicle", data: data, user: user})
+    })
+  }
 })
 
 router.post('/add_vehicle', function (req, res, next) {
@@ -167,6 +172,7 @@ router.post('/add_vehicle', function (req, res, next) {
     res.send(err.message)
   }).then(function () {
     res.redirect('/dashboard/vehicle')
+
   })
 })
 
@@ -204,6 +210,106 @@ router.post('/edit_vehicle', function (req, res, next) {
   })
 })
 
+router.get('/delete_vehicle/:id', function (req, res, next) {
+  Vehicles.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).catch(function (err) {
+    res.send(err.message)
+  }).then(function () {
+    res.redirect('/dashboard/vehicle')
+  })
+})
+
+
+
+
+router.get('/finance', function (req, res, next) {
+  var data = {
+    user_id: req.session.user_id,
+    user_name: req.session.username,
+    role: req.session.role
+  }
+
+  Finances.findAll().then(function (finance) {
+    res.render('finance', {title: "Finance", data: data, finance: finance})
+  }).catch(function (err) {
+    res.send(err.message)
+  })
+})
+
+router.get('/add_finance', function (req, res, next) {
+  var data = {
+    user_id: req.session.user_id,
+    user_name: req.session.username,
+    role: req.session.role
+  }
+
+  if (data.role != "administrator") {
+    res.redirect('/dashboard')
+  } else {
+    Vehicles.findAll().then(function (vehicle) {
+      res.render('add_finance', {title: "Add Finance", data: data, vehicle: vehicle})
+    })
+  }
+})
+
+router.post('/add_finance', function (req, res, next) {
+  Finances.create({
+    price: req.body.price,
+    VehicleId: req.body.vehicle_id
+  }).catch(function (err) {
+    res.send(err.message)
+  }).then(function () {
+    res.redirect('/dashboard/finance')
+  })
+})
+
+router.get('/edit_finance/:id', function (req, res, next) {
+  var data = {
+    user_id: req.session.user_id,
+    user_name: req.session.username,
+    role: req.session.role
+  }
+
+  Finances.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).catch(function (err) {
+    res.send(err.message)
+  }).then(function (finance) {
+    res.render('edit_finance', {title: "Edit Finacne", data: data, finance: finance})
+  })
+})
+
+router.post('/edit_finance', function (req, res, next) {
+  Finances.update({
+    price: req.body.price
+  }, {
+    where: {
+      id: req.body.finance_id
+    }
+  }).catch(function (err) {
+    res.send(err.message)
+  }).then(function (vehicle) {
+    res.redirect('/dashboard/finance')
+  })
+})
+
+router.get('/delete_finance/:id', function (req, res, next) {
+  Finances.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).catch(function (err) {
+    res.send(err.message)
+  }).then(function () {
+    res.redirect('/dashboard/finance')
+  })
+})
+
 
 
 router.get('/vehicle_report', function (req, res, next) {
@@ -232,6 +338,11 @@ router.get('/profit_report', function (req, res, next) {
   }).catch(function (err) {
     res.send(err.message)
   })
+})
+
+router.get('/logout', function (req, res, next) {
+  req.session.destroy()
+  res.redirect('/')
 })
 
 module.exports = router;
