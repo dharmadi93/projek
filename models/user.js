@@ -40,8 +40,9 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        User.hasMany(models.Vehicle)
       },
-      
+
       // addUser: function (user) {
       //   User.create({
       //     username: user.username,
@@ -56,7 +57,7 @@ module.exports = function(sequelize, DataTypes) {
       //     console.log(err.message)
       //   })
       // },
-      
+
       // viewUser: function () {
       //
       // }

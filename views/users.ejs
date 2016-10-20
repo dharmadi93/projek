@@ -42,7 +42,41 @@
             <!-- BEGIN DASHBOARD STATS 1-->
             <div class="row">
 
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <td>No.</td>
+                      <td>Name</td>
+                      <td>username</td>
+                      <td>email</td>
+                      <td>Role</td>
+                      <td>Phone</td>
+                      <td>Address</td>
+                      <td>Action</td>
+                    </tr>
+                  </thead>
 
+                  <tbody>
+                    <% for (var i = 0; i < user.length; i++) { %>
+                    <tr>
+                      <td><%= i+1%></td>
+                      <td><%= user[i].first_name%> <%= user[i].last_name%></td>
+                      <td><%= user[i].username%></td>
+                      <td><%= user[i].email%></td>
+                      <td><%= user[i].role%></td>
+                      <td><%= user[i].phone%></td>
+                      <td><%= user[i].address%></td>
+                      <td>
+                        <a href="/dashboard/edit_user/<%= user[i].id%>" class="btn btn-warning">Edit</a>
+                        <a href="/dashboard/delete_user/<%= user[i].id%>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                      </td>
+                    </tr>
+
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
 
             </div>
 
